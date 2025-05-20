@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sean's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+    /* Cyber theme (default) */
+    --neon-green: #00ff00;
+    --dark-bg: #000000;
+    --light-text: #ffffff;
+    
+    /* Winter theme */
+    --winter-primary: #2c5c7c;
+    --winter-secondary: #a8d0e6;
+    --winter-bg: #f8f9fa;
+    --winter-text: #2c5c7c;
+    --winter-accent: #76b4d4;
+    --winter-light: #e3f2fd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+    color: var(--neon-green);
+    background-color: var(--dark-bg);
+    transition: all 0.3s ease;
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.theme-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#cyberTheme {
+    background: #000;
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+}
+
+#winterTheme {
+    background: var(--winter-light);
+    color: var(--winter-primary);
+    border: 1px solid var(--winter-primary);
+}
+
+.theme-btn.active {
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Container and general styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid var(--neon-green);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin-right: 100px;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.3s;
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.nav-links a:hover {
+    color: var(--light-text);
+    text-shadow: 0 0 20px var(--neon-green);
+}
+
+/* Hero section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--neon-green);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px var(--neon-green);
+    min-height: 4rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    max-width: 700px;
+    text-shadow: 0 0 10px var(--neon-green);
+    min-height: 1.5rem;
+}
+
+/* About section */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: rgba(0, 255, 0, 0.05);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.about-image {
+    flex: 1;
+    height: 300px;
+    border: 2px solid var(--neon-green);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.about-text {
+    flex: 2;
+    color: var(--light-text);
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Section styles */
+section {
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 15px var(--neon-green);
+}
+
+/* Projects grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.project-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--neon-green);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.project-image {
+    height: 200px;
+    border-bottom: 1px solid var(--neon-green);
+    overflow: hidden;
+}
+
+.project-details {
+    padding: 20px;
+}
+
+.project-details h3 {
+    color: var(--neon-green);
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.project-tag {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: var(--neon-green);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid var(--neon-green);
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: transparent;
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.project-link:hover {
+    background-color: var(--neon-green);
+    color: var(--dark-bg);
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 40px 0;
+    border-top: 2px solid var(--neon-green);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background-color: var(--neon-green);
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Winter theme styles */
+body.winter-theme {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--winter-bg);
+    color: var(--winter-text);
+}
+
+.winter-theme header {
+    background-color: var(--winter-primary);
+    border-bottom: none;
+    box-shadow: 0 2px 5px rgba(168, 208, 230, 0.3);
+}
+
+.winter-theme .nav-links a,
+.winter-theme .logo {
+    color: var(--winter-bg);
+    text-shadow: 0 0 10px var(--winter-accent);
+}
+
+.winter-theme .hero {
+    background: linear-gradient(rgba(44, 92, 124, 0.8), rgba(44, 92, 124, 0.8)),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1');
+}
+
+.winter-theme .hero h1,
+.winter-theme .hero p {
+    color: var(--winter-bg);
+    text-shadow: 0 0 15px var(--winter-accent);
+}
+
+.winter-theme section {
+    border-bottom: 1px solid var(--winter-accent);
+}
+
+.winter-theme .section-title {
+    color: var(--winter-primary);
+    text-shadow: 0 0 15px var(--winter-accent);
+    border-bottom: 2px solid var(--winter-accent);
+    padding-bottom: 10px;
+}
+
+.winter-theme .about-content {
+    background-color: var(--winter-light);
+    border: 1px solid var(--winter-accent);
+    box-shadow: 0 0 15px rgba(168, 208, 230, 0.2);
+}
+
+.winter-theme .about-text {
+    color: var(--winter-text);
+}
+
+.winter-theme .about-text p {
+    text-shadow: none;
+}
+
+.winter-theme .project-card {
+    background-color: var(--winter-light);
+    border: 1px solid var(--winter-accent);
+    box-shadow: 0 0 15px rgba(168, 208, 230, 0.2);
+    transition: all 0.3s ease;
+}
+
+.winter-theme .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(118, 180, 212, 0.4);
+    border-color: var(--winter-secondary);
+}
+
+.winter-theme .project-details h3 {
+    color: var(--winter-primary);
+    text-shadow: 0 0 10px var(--winter-accent);
+}
+
+.winter-theme .project-tag {
+    background-color: var(--winter-accent);
+    color: var(--winter-bg);
+    border: none;
+    box-shadow: 0 0 5px rgba(168, 208, 230, 0.3);
+}
+
+.winter-theme .project-link {
+    color: var(--winter-primary);
+    border-color: var(--winter-accent);
+    box-shadow: 0 0 10px rgba(168, 208, 230, 0.2);
+}
+
+.winter-theme .project-link:hover {
+    background-color: var(--winter-primary);
+    color: var(--winter-bg);
+    box-shadow: 0 0 15px var(--winter-accent);
+}
+
+.winter-theme footer {
+    background-color: var(--winter-primary);
+    border-top: none;
+    box-shadow: 0 -2px 10px rgba(168, 208, 230, 0.2);
+}
+
+.winter-theme footer p {
+    color: var(--winter-bg);
+    text-shadow: 0 0 5px var(--winter-accent);
+}
+
+.winter-theme .social-btn {
+    color: var(--winter-bg);
+    border-color: var(--winter-bg);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.winter-theme .social-btn:hover {
+    background-color: var(--winter-bg);
+    color: var(--winter-primary);
+    box-shadow: 0 0 15px var(--winter-accent);
+}
+
+.winter-theme .about-image {
+    border: none;
+    box-shadow: 0 0 15px rgba(168, 208, 230, 0.2);
+}
+
+.winter-theme .project-image {
+    border-bottom: none;
+}
+
+.winter-theme .project-card {
+    border: 1px solid var(--winter-accent);
+}
+
+
+/* Update theme switcher button for winter theme */
+#winterTheme {
+    background: var(--winter-light);
+    color: var(--winter-primary);
+    border: 1px solid var(--winter-accent);
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 0 10px rgba(168, 208, 230, 0.2);
+}
+
+#winterTheme:hover {
+    background: var(--winter-accent);
+    color: var(--winter-bg);
+    box-shadow: 0 0 15px var(--winter-accent);
+}
+
+#winterTheme.active {
+    background: var(--winter-primary);
+    color: var(--winter-bg);
+    box-shadow: 0 0 20px var(--winter-accent);
+}
+
+/* Winter effect containers */
+.winter-theme .tetris-container-left,
+.winter-theme .tetris-container-right {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    display: block;
+}
+
+.tetris-container-left {
+    left: 0;
+}
+
+.tetris-container-right {
+    right: 0;
+}
+
+/* Winter theme container styles */
+.winter-theme .tetris-container-left,
+.winter-theme .tetris-container-right {
+    width: 250px; /* Wider for snow effect */
+}
+
+/* Hide tetris in winter theme */
+.winter-theme .tetris-block {
+    display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-switcher {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button id="cyberTheme" class="theme-btn active">Cyber Theme</button>
+        <button id="winterTheme" class="theme-btn">Winter Theme</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Sean'z Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#social">Social</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <h1></h1>
+        <p></p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="your-profile-image.jpg" alt="Sean Eng" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm a passionate data analyst specializing in transforming complex data into actionable insights. With expertise in data visualization and statistical analysis, I help organizations make data-driven decisions.</p>
+                    <p>I work with various tools and technologies including Python, R, SQL, Tableau, and Power BI. My focus is on creating clear, impactful data visualizations and developing robust analytical solutions.</p>
+                    <p>When I'm not analyzing data, you can find me exploring new datasets, attending data science meetups, or sharing my knowledge through blog posts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Data Visualization Dashboard</h3>
+                        <p>Interactive dashboard showcasing sales analytics and customer insights.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Tableau</span>
+                            <span class="project-tag">SQL</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Predictive Analytics Model</h3>
+                        <p>Machine learning model for customer churn prediction.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Scikit-learn</span>
+                            <span class="project-tag">Pandas</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Market Analysis Report</h3>
+                        <p>Comprehensive market analysis using statistical methods.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">R</span>
+                            <span class="project-tag">ggplot2</span>
+                            <span class="project-tag">Power BI</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Financial Data Analysis</h3>
+                        <p>Advanced financial analytics dashboard with predictive modeling.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">MongoDB</span>
+                            <span class="project-tag">Plotly</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Social Media Analytics</h3>
+                        <p>Real-time social media sentiment analysis and trend tracking.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Twitter API</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Add project image here -->
+                    </div>
+                    <div class="project-details">
+                        <h3>Healthcare Analytics</h3>
+                        <p>Patient data analysis and predictive healthcare outcomes.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">R</span>
+                            <span class="project-tag">Tensorflow</span>
+                            <span class="project-tag">SQL</span>
+                        </div>
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">View Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="social">
+        <div class="container">
+            <p>Connect with me :)</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/eng-zheng-yu-222567280/" class="social-btn" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/seanengzy" class="social-btn" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=seaneng0101205@gmail.com" class="social-btn" target="_blank">
+                    <i class="fas fa-envelope"></i> Gmail
+                </a>
+            </div>
+            <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Typing effect
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Tetris falling blocks effect
+function createTetrisEffect(container) {
+    const colors = ['#00ff00', '#ffffff', '#32cd32', '#98fb98'];
+    let blockCount = 0;
+    const maxBlocks = 15; // Limit maximum blocks
+    
+    function createBlock() {
+        // Check if we've reached the maximum number of blocks
+        if (blockCount >= maxBlocks) return;
+
+        const block = document.createElement('div');
+        block.style.position = 'absolute';
+        block.style.width = Math.random() * 20 + 10 + 'px';
+        block.style.height = Math.random() * 20 + 10 + 'px';
+        block.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Constrain the left position to the container width (20% margin on each side)
+        const containerWidth = container.offsetWidth;
+        const margin = containerWidth * 0.2;
+        const availableWidth = containerWidth - margin * 2;
+        const randomX = margin + Math.random() * availableWidth;
+        block.style.left = randomX + 'px';
+        
+        block.style.top = '-20px';
+        block.style.opacity = '0.6';
+        container.appendChild(block);
+        blockCount++;
+
+        let position = -20;
+        function animate() {
+            position += 2;
+            block.style.top = position + 'px';
+            if (position > window.innerHeight) {
+                container.removeChild(block);
+                blockCount--;
+                return;
+            }
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    }
+    // Slower interval for block creation
+    return setInterval(createBlock, 1000); // Changed from 500 to 1000ms
+}
+
+// Snow effect
+function createSnowEffect(container) {
+    const colors = ['#fff', '#a8d0e6', '#76b4d4', '#e3f2fd']; // More blue tones
+    let flakeCount = 0;
+    const maxFlakes = 40; // Increased max flakes
+    
+    function createSnowflake() {
+        if (flakeCount >= maxFlakes) return;
+
+        const flake = document.createElement('div');
+        flake.style.position = 'absolute';
+        flake.style.width = Math.random() * 15 + 5 + 'px'; // Larger flakes
+        flake.style.height = flake.style.width;
+        flake.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        flake.style.borderRadius = '50%';
+        flake.style.boxShadow = '0 0 10px ' + colors[Math.floor(Math.random() * colors.length)]; // Add glow
+        
+        // Wider distribution
+        const containerWidth = container.offsetWidth;
+        const margin = containerWidth * 0.1; // Reduced margin for wider spread
+        const availableWidth = containerWidth - margin * 2;
+        const randomX = margin + Math.random() * availableWidth;
+        flake.style.left = randomX + 'px';
+        
+        flake.style.top = '-10px';
+        flake.style.opacity = '0.9'; // Increased opacity
+        container.appendChild(flake);
+        flakeCount++;
+        
+        const speed = 1 + Math.random() * 2;
+        let position = -10;
+        let swing = 0;
+        const swingAmount = Math.random() * 2 - 1;
+
+        const fall = setInterval(() => {
+            position += speed;
+            swing += swingAmount;
+            flake.style.top = position + 'px';
+            flake.style.left = `calc(${flake.style.left} + ${Math.sin(position/30) * 5}px)`;
+            
+            if (position > window.innerHeight) {
+                clearInterval(fall);
+                container.removeChild(flake);
+                flakeCount--; // Decrease count when flake is removed
+            }
+        }, 50);
+    }
+
+    // Slower interval for snowflake creation
+    return setInterval(createSnowflake, 600); 
+}
+
+// Add container styles
+const containerStyles = `
+    .tetris-container-left,
+    .tetris-container-right {
+        position: fixed;
+        top: 0;
+        width: 150px; /* Fixed width for containers */
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .tetris-container-left {
+        left: 0;
+    }
+
+    .tetris-container-right {
+        right: 0;
+    }
+`;
+
+// Add styles to document
+const styleSheet = document.createElement("style");
+styleSheet.textContent = containerStyles;
+document.head.appendChild(styleSheet);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Theme switching elements
+    const cyberTheme = document.getElementById('cyberTheme');
+    const winterTheme = document.getElementById('winterTheme');
+    const body = document.body;
+    let snowInterval = [];
+    let tetrisInterval = [];
+
+    // Create effect containers
+    const leftContainer = document.createElement('div');
+    leftContainer.className = 'tetris-container-left';
+    const rightContainer = document.createElement('div');
+    rightContainer.className = 'tetris-container-right';
+    document.body.appendChild(leftContainer);
+    document.body.appendChild(rightContainer);
+
+    // Function to clear all effects
+    function clearAllEffects() {
+        if (snowInterval.length) {
+            snowInterval.forEach(interval => clearInterval(interval));
+            snowInterval = [];
+        }
+        if (tetrisInterval.length) {
+            tetrisInterval.forEach(interval => clearInterval(interval));
+            tetrisInterval = [];
+        }
+    }
+
+    // Theme switching event listeners
+    cyberTheme.addEventListener('click', function() {
+        clearAllEffects();
+        body.classList.remove('winter-theme');
+        cyberTheme.classList.add('active');
+        winterTheme.classList.remove('active');
+    
+        // Show containers and start tetris
+        leftContainer.style.display = 'block';
+        rightContainer.style.display = 'block';
+        tetrisInterval = [
+            createTetrisEffect(leftContainer),
+            createTetrisEffect(rightContainer)
+        ];
+    });
+
+    winterTheme.addEventListener('click', function() {
+        clearAllEffects();
+        body.classList.add('winter-theme');
+        winterTheme.classList.add('active');
+        cyberTheme.classList.remove('active');
+    
+        // Show containers for snow and start snow
+        leftContainer.style.display = 'block';
+        rightContainer.style.display = 'block';
+        snowInterval = [
+            createSnowEffect(leftContainer),
+            createSnowEffect(rightContainer)
+        ];
+    });
+
+    // Initialize typing effect
+    const titleElement = document.querySelector('.hero h1');
+    const subtitleElement = document.querySelector('.hero p');
+    const titleText = "I'm Sean Eng";
+    const subtitleText = "A Data Analyst who makes Data speaks...";
+
+    setTimeout(() => typeWriter(titleElement, titleText, 100), 500);
+    setTimeout(() => typeWriter(subtitleElement, subtitleText, 50), 2000);
+
+    // Initialize default theme effects
+    clearAllEffects();
+    if (body.classList.contains('winter-theme')) {
+        winterTheme.classList.add('active');
+        cyberTheme.classList.remove('active');
+        leftContainer.style.display = 'block';
+        rightContainer.style.display = 'block';
+        snowInterval = [
+            createSnowEffect(leftContainer),
+            createSnowEffect(rightContainer)
+        ];
+    } else {
+        cyberTheme.classList.add('active');
+        winterTheme.classList.remove('active');
+        leftContainer.style.display = 'block';
+        rightContainer.style.display = 'block';
+        tetrisInterval = [
+            createTetrisEffect(leftContainer),
+            createTetrisEffect(rightContainer)
+        ];
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
